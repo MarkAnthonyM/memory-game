@@ -2,8 +2,8 @@
 const listOfCards = document.querySelectorAll('.card');
 
 //this function when called creates img elements
-function makeImgTag() {
-  const imgEle = document.createElement('img');
+function makeImgTag(string) {
+  const imgEle = document.createElement(string);
   return imgEle;
 }
 
