@@ -8,9 +8,9 @@ function makeTag(string) {
 }
 
 //This function will append created tags to elements
-function appendToElement(array) {
+function appendToElement(array, string) {
   for (let i = 0; i < array.length; i++) {
-    let tagContainer = makeImgTag();
+    let tagContainer = makeTag(string);
     array[i].appendChild(tagContainer);
   }
 }
