@@ -29,21 +29,26 @@ function trimArray(array, range) {
 }
 
 function addImgToCards(elArray, tagArray, attr) {
-  let trimedArray = trimArray(elArray);
+  let trimedArray = trimArray(elArray, tagArray);
   let tempArray = [];
   let iterator = 0;
   while (tagArray.length !== tempArray.length) {
     let randomIndex = Math.floor(Math.random() * trimedArray.length);
-    if (tempArray.includes(trimedArray[randomIndex])) {
+    if (trimedArray.length === 1) {
       listOfImgTags[iterator].setAttribute(attr, trimedArray[randomIndex]);
-      trimedArray.splice(randomIndex, 1);
-      iterator += 1;
-      console.log('Already in tempArray ' + iterator);
+      break;
     } else {
-      listOfImgTags[iterator].setAttribute(attr, trimedArray[randomIndex]);
-      tempArray.push(trimedArray[randomIndex]);
-      iterator += 1;
-      console.log('Not in temp array ' + iterator);
+      if (tempArray.includes(trimedArray[randomIndex])) {
+        listOfImgTags[iterator].setAttribute(attr, trimedArray[randomIndex]);
+        trimedArray.splice(randomIndex, 1);
+        iterator += 1;
+        console.log('Already in tempArray ' + tempArray.length);
+      } else {
+        listOfImgTags[iterator].setAttribute(attr, trimedArray[randomIndex]);
+        tempArray.push(trimedArray[randomIndex]);
+        iterator += 1;
+        console.log('Not in temp array ' + tempArray.length);
+      }
     }
   }
 }
