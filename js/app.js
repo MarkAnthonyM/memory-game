@@ -42,12 +42,10 @@ function addImgToCards(elArray, tagArray, attr) {
         listOfImgTags[iterator].setAttribute(attr, trimedArray[randomIndex]);
         trimedArray.splice(randomIndex, 1);
         iterator += 1;
-        console.log('Already in tempArray ' + tempArray.length);
       } else {
         listOfImgTags[iterator].setAttribute(attr, trimedArray[randomIndex]);
         tempArray.push(trimedArray[randomIndex]);
         iterator += 1;
-        console.log('Not in temp array ' + tempArray.length);
       }
     }
   }
