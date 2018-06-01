@@ -19,6 +19,15 @@ function appendToElement(array, string) {
   }
 }
 
+//This function will trim an array to fit amount of img tags
+function trimArray(array, range) {
+  let newArray = [];
+  for (let i = 0; i < range.length/2; i++) {
+    newArray.push(array[i]);
+  }
+  return newArray;
+}
+
 function addImgToCards(elArray, tagArray, attr) {
   let trimedArray = trimArray(elArray);
   let tempArray = [];
