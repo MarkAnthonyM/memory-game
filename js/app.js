@@ -52,3 +52,14 @@ function addImgToCards(elArray, tagArray, attr) {
     }
   }
 }
+
+//Code will flip card when clicked on
+function cardFlip(array) {
+  for (let i = 0; i < array.length; i++) {
+    array[i].addEventListener('click', function(event) {
+      console.log('Card has been clicked!');
+    })
+  }
+}
+
+cardFlip(listOfCards);
