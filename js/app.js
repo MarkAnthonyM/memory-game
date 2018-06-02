@@ -59,3 +59,7 @@ function cardFlip(array, tag) {
     })
   }
 }
+
+appendToElement(listOfCards, 'img');
+addImgToCards(imgArray, listOfImgTags, 'src');
+cardFlip(listOfCards, listOfImgTags);
