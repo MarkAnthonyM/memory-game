@@ -28,19 +28,19 @@ function trimArray(array, range) {
   return newArray;
 }
 
-//This function appends images to card elements
-function addImgToCards(elArray, tagArray, attr) {
-  let trimedArray = trimArray(elArray, tagArray);
+//This function takes images from image array and appends them to img tags
+function addImgToCards(imagesArray, tagArray, attr) {
+  let trimedArray = trimArray(imagesArray, tagArray);
   let tempArray = [];
   let iterator = 0;
   while (trimedArray.length > 0) {
     let randomIndex = Math.floor(Math.random() * trimedArray.length);
     if (tempArray.includes(trimedArray[randomIndex])) {
-      listOfImgTags[iterator].setAttribute(attr, trimedArray[randomIndex]);
+      tagArray[iterator].setAttribute(attr, trimedArray[randomIndex]);
       trimedArray.splice(randomIndex, 1);
       iterator += 1;
     } else {
-      listOfImgTags[iterator].setAttribute(attr, trimedArray[randomIndex]);
+      tagArray[iterator].setAttribute(attr, trimedArray[randomIndex]);
       tempArray.push(trimedArray[randomIndex]);
       iterator += 1;
     }
