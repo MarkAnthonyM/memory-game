@@ -28,6 +28,7 @@ function trimArray(array, range) {
   return newArray;
 }
 
+//This function appends images to card elements
 function addImgToCards(elArray, tagArray, attr) {
   let trimedArray = trimArray(elArray, tagArray);
   let tempArray = [];
