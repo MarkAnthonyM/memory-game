@@ -1,3 +1,3 @@
 # Memory Game Project
 
-An application runs the well-known game _Concentration_!
+An application that runs the well-known game _Concentration_!
