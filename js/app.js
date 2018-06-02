@@ -8,6 +8,7 @@ let imgArray = ['https://avatarfiles.alphacoders.com/242/24282.jpg', 'https://av
 //this function when called creates img elements
 function makeTag(string) {
   const imgEle = document.createElement(string);
+  imgEle.style.display = 'none';
   return imgEle;
 }
 
