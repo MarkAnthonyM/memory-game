@@ -48,14 +48,20 @@ function addImgToCards(imagesArray, tagArray, attr) {
   }
 }
 
-//Code will flip card when clicked on
+//Code will flip card when clicked on and check for matching cards
 function cardFlip(array, tag) {
+  tempArray = [];
   for (let i = 0; i < array.length; i++) {
     array[i].addEventListener('click', function(event) {
       if (tag[i].style.display === 'none') {
         tag[i].style.display = '';
+        tempArray.push(event.target.firstElementChild.currentSrc);
+        if (tempArray.length === 2) {
+          checkMatch();
+        }
       } else {
         tag[i].style.display = 'none';
+        tempArray.splice(0, 1);
       }
     })
   }
