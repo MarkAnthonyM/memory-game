@@ -51,13 +51,21 @@ function addImgToCards(imagesArray, tagArray, attr) {
 //Function will check filpped cards for match. If matching, will remove them.
 //If not, will reset cards
 function checkMatch(array) {
+  const toRemove = document.getElementsByClassName('flipped')
   if (array[0] === array[1]) {
-    const toRemove = document.getElementsByClassName('flipped')
     for (var i = 0; i < toRemove.length; i++) {
       toRemove[i].style.visibility = 'hidden';
     }
   } else {
-    resetCard();
+    resetCard(toRemove);
+  }
+}
+
+//Function will reset card when called
+function resetCard(array) {
+  for (var i = 0; i < array.length; i++) {
+    array[i].style.display = 'none';
+    array[i].setAttribute('class', '');
   }
 }
 
