@@ -48,6 +48,19 @@ function addImgToCards(imagesArray, tagArray, attr) {
   }
 }
 
+//Function will check filpped cards for match. If matching, will remove them.
+//If not, will reset cards
+function checkMatch(array) {
+  if (array[0] === array[1]) {
+    const toRemove = document.getElementsByClassName('flipped')
+    for (var i = 0; i < toRemove.length; i++) {
+      toRemove[i].style.visibility = 'hidden';
+    }
+  } else {
+    resetCard();
+  }
+}
+
 //Code will flip card when clicked on and check for matching cards
 function cardFlip(array, tag) {
   tempArray = [];
@@ -55,12 +68,15 @@ function cardFlip(array, tag) {
     array[i].addEventListener('click', function(event) {
       if (tag[i].style.display === 'none') {
         tag[i].style.display = '';
+        tag[i].setAttribute('class', 'flipped');
         tempArray.push(event.target.firstElementChild.currentSrc);
         if (tempArray.length === 2) {
-          checkMatch();
+          checkMatch(tempArray);
+          tempArray = [];
         }
       } else {
         tag[i].style.display = 'none';
+        tag[i].setAttribute('class', '');
         tempArray.splice(0, 1);
       }
     })
