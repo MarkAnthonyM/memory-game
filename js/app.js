@@ -79,10 +79,10 @@ function timerCountdown() {
       seconds = 59;
       minutes -= 1;
     }
-    timer.textContent = minutes + ':' + seconds;
+    timer.textContent = (minutes > 9 ? minutes : '0' + minutes) + ':' + (seconds > 9 ? seconds : '0' + seconds);
   } else if (minutes === 0 && seconds > 0) {
     seconds -= 1;
-    timer.textContent = minutes + ':' + seconds;
+    timer.textContent = (minutes > 9 ? minutes : '0' + minutes) + ':' + (seconds > 9 ? seconds : '0' + seconds);
   } else {
     timer.textContent = 'Time Up!';
     console.log('This should be the only log');
