@@ -1,6 +1,9 @@
 //List of Variables
 const listOfCards = document.querySelectorAll('.card');
 const listOfImgTags = document.getElementsByTagName('img');
+const timer = document.querySelector('span');
+let minutes = 3;
+let seconds = 60;
 
 //Array used to store card images
 let imgArray = ['https://avatarfiles.alphacoders.com/242/24282.jpg', 'https://avatarfiles.alphacoders.com/241/24193.jpg', 'https://avatarfiles.alphacoders.com/235/23542.jpg', 'https://avatarfiles.alphacoders.com/226/22680.jpg', 'https://avatarfiles.alphacoders.com/187/18787.jpg', 'https://avatarfiles.alphacoders.com/481/4816.jpg', 'https://avatarfiles.alphacoders.com/471/4717.jpg', 'https://avatarfiles.alphacoders.com/799/79.jpg', 'https://avatarfiles.alphacoders.com/114/114197.jpg', 'https://avatarfiles.alphacoders.com/841/84143.png', 'https://avatarfiles.alphacoders.com/583/58365.jpg', 'https://avatarfiles.alphacoders.com/253/25343.jpg']
@@ -67,6 +70,32 @@ function cardFlip(array, tag) {
   }
 }
 
+//Function will count timer down
+function timerCountdown() {
+  if (minutes > 0) {
+    if (seconds <= 60 && seconds > 0) {
+      seconds -= 1;
+    } else {
+      seconds = 59;
+      minutes -= 1;
+    }
+    timer.textContent = minutes + ':' + seconds;
+  } else if (minutes === 0 && seconds > 0) {
+    seconds -= 1;
+    timer.textContent = minutes + ':' + seconds;
+  } else {
+    timer.textContent = 'Time Up!';
+    console.log('This should be the only log');
+  }
+
+  timerClock();
+}
+
+function timerClock() {
+  setTimeout(timerCountdown, 1000);
+}
+
 appendToElement(listOfCards, 'img');
 addImgToCards(imgArray, listOfImgTags, 'src');
 cardFlip(listOfCards, listOfImgTags);
+timerClock();
