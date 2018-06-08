@@ -59,9 +59,10 @@ function checkMatch(array) {
   const toRemove = document.getElementsByClassName('flipped')
   if (array[0] === array[1]) {
     for (let i = 0; i < toRemove.length; i++) {
-      toRemove[i].push(cardsMatched);
       toRemove[i].style.visibility = 'hidden';
     }
+    cardsMatched.push(toRemove[0]);
+    gameWin(cardsMatched);
   } else {
     resetCard(toRemove);
   }
@@ -70,8 +71,8 @@ function checkMatch(array) {
 //Function will check array storing matched cards for the correct amount
 //in order to win game
 function gameWin(cardArray) {
-  if (cardArray === 12) {
-
+  if (cardArray.length === 6) {
+    showModal(winScreen, modalClose[0])
   }
 }
 
@@ -88,12 +89,17 @@ function cardFlip() {
   tempArray = [];
   mainTable.addEventListener('click', function(event) {
     if (event.target.getAttribute('class') === 'card') {
-      event.target.firstElementChild.style.display = '';
-      event.target.firstElementChild.setAttribute('class', 'flipped');
-      tempArray.push(event.target.firstElementChild.currentSrc);
-      if (tempArray.length === 2) {
-        setTimeout(checkMatch, 3000, tempArray);
-        tempArray = [];
+      if (event.target.firstElementChild.style.visibility === 'hidden') {
+        console.log('this condition fired!');
+      } else {
+        event.target.firstElementChild.style.display = '';
+        event.target.firstElementChild.setAttribute('class', 'flipped');
+        tempArray.push(event.target.firstElementChild.currentSrc);
+        if (tempArray.length === 2) {
+          // setTimeout(checkMatch, 3000, tempArray);
+          checkMatch(tempArray);
+          tempArray = [];
+        }
       }
     } else {
       if (event.target.nodeName === 'IMG') {
