@@ -4,6 +4,8 @@ const listOfImgTags = document.getElementsByTagName('img');
 const winScreen = document.getElementById('winModal');
 const loseScreen = document.getElementById('loseModal');
 const modalClose = document.getElementsByClassName('modal-button');
+const mainTable = document.getElementById('cardTable');
+const cardsMatched = [];
 
 //Array used to store card images
 let imgArray = ['https://avatarfiles.alphacoders.com/242/24282.jpg', 'https://avatarfiles.alphacoders.com/241/24193.jpg', 'https://avatarfiles.alphacoders.com/235/23542.jpg', 'https://avatarfiles.alphacoders.com/226/22680.jpg', 'https://avatarfiles.alphacoders.com/187/18787.jpg', 'https://avatarfiles.alphacoders.com/481/4816.jpg', 'https://avatarfiles.alphacoders.com/471/4717.jpg', 'https://avatarfiles.alphacoders.com/799/79.jpg', 'https://avatarfiles.alphacoders.com/114/114197.jpg', 'https://avatarfiles.alphacoders.com/841/84143.png', 'https://avatarfiles.alphacoders.com/583/58365.jpg', 'https://avatarfiles.alphacoders.com/253/25343.jpg']
@@ -51,23 +53,56 @@ function addImgToCards(imagesArray, tagArray, attr) {
   }
 }
 
+//Function will check filpped cards for match. If matching, will remove them.
+//If not, will reset cards
+function checkMatch(array) {
+  const toRemove = document.getElementsByClassName('flipped')
+  if (array[0] === array[1]) {
+    for (let i = 0; i < toRemove.length; i++) {
+      toRemove[i].push(cardsMatched);
+      toRemove[i].style.visibility = 'hidden';
+    }
+  } else {
+    resetCard(toRemove);
+  }
+}
+
+//Function will check array storing matched cards for the correct amount
+//in order to win game
+function gameWin(cardArray) {
+  if (cardArray === 12) {
+
+  }
+}
+
+//Function will reset card when called
+function resetCard(array) {
+  while (array.length > 0) {
+    array[0].style.display = 'none'
+    array[0].setAttribute('class', '');
+  }
+}
+
 //Code will flip card when clicked on and check for matching cards
-function cardFlip(array, tag) {
+function cardFlip() {
   tempArray = [];
-  for (let i = 0; i < array.length; i++) {
-    array[i].addEventListener('click', function(event) {
-      if (tag[i].style.display === 'none') {
-        tag[i].style.display = '';
-        tempArray.push(event.target.firstElementChild.currentSrc);
-        if (tempArray.length === 2) {
-          checkMatch();
-        }
-      } else {
-        tag[i].style.display = 'none';
+  mainTable.addEventListener('click', function(event) {
+    if (event.target.getAttribute('class') === 'card') {
+      event.target.firstElementChild.style.display = '';
+      event.target.firstElementChild.setAttribute('class', 'flipped');
+      tempArray.push(event.target.firstElementChild.currentSrc);
+      if (tempArray.length === 2) {
+        setTimeout(checkMatch, 3000, tempArray);
+        tempArray = [];
+      }
+    } else {
+      if (event.target.nodeName === 'IMG') {
+        event.target.style.display = 'none';
+        event.target.setAttribute('class', '');
         tempArray.splice(0, 1);
       }
-    })
-  }
+    }
+  })
 }
 
 //Function to show modal based on game end condition
@@ -79,6 +114,28 @@ function showModal(gameCondition, button) {
   }
 }
 
+//Older, less efficent code. Keeping around for documentation purposes.
+// function cardFlip(array, tag) {
+//   tempArray = [];
+//   for (let i = 0; i < array.length; i++) {
+//     array[i].addEventListener('click', function(event) {
+//       if (tag[i].style.display === 'none') {
+//         tag[i].style.display = '';
+//         tag[i].setAttribute('class', 'flipped');
+//         tempArray.push(event.target.firstElementChild.currentSrc);
+//         if (tempArray.length === 2) {
+//           checkMatch(tempArray);
+//           tempArray = [];
+//         }
+//       } else {
+//         tag[i].style.display = 'none';
+//         tag[i].setAttribute('class', '');
+//         tempArray.splice(0, 1);
+//       }
+//     })
+//   }
+// }
+
 appendToElement(listOfCards, 'img');
 addImgToCards(imgArray, listOfImgTags, 'src');
-cardFlip(listOfCards, listOfImgTags);
+cardFlip();
