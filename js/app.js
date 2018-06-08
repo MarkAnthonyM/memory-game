@@ -1,6 +1,10 @@
 //List of Variables
 const listOfCards = document.querySelectorAll('.card');
 const listOfImgTags = document.getElementsByTagName('img');
+const winScreen = document.getElementById('winModal');
+const loseScreen = document.getElementById('loseModal');
+const modalButton = document.getElementById('myBtn');
+const modalClose = document.getElementsByClassName('modal-button')[0];
 
 //Array used to store card images
 let imgArray = ['https://avatarfiles.alphacoders.com/242/24282.jpg', 'https://avatarfiles.alphacoders.com/241/24193.jpg', 'https://avatarfiles.alphacoders.com/235/23542.jpg', 'https://avatarfiles.alphacoders.com/226/22680.jpg', 'https://avatarfiles.alphacoders.com/187/18787.jpg', 'https://avatarfiles.alphacoders.com/481/4816.jpg', 'https://avatarfiles.alphacoders.com/471/4717.jpg', 'https://avatarfiles.alphacoders.com/799/79.jpg', 'https://avatarfiles.alphacoders.com/114/114197.jpg', 'https://avatarfiles.alphacoders.com/841/84143.png', 'https://avatarfiles.alphacoders.com/583/58365.jpg', 'https://avatarfiles.alphacoders.com/253/25343.jpg']
@@ -64,6 +68,23 @@ function cardFlip(array, tag) {
         tempArray.splice(0, 1);
       }
     })
+  }
+}
+
+//Function to test modal open
+modalButton.onclick = function() {
+  winScreen.style.display = 'block';
+}
+
+//Fucntion to test modal Close
+modalClose.onclick = function() {
+  winScreen.style.display = 'none';
+}
+
+//function to close modal when ever clicked outside
+window.onclick = function(event) {
+  if (event.target == winScreen) {
+    winScreen.style.display = 'none';
   }
 }
 
