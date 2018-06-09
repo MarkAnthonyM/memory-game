@@ -139,13 +139,23 @@ function showModal(gameCondition) {
 //   }
 // }
 
+//Function will remove "hidden" attribute from img elements
+function returnCards(array) {
+  console.log(listOfImgTags);
+  for (let i = 0; i < array.length; i++) {
+    array[i].style.visibility = 'visible';
+    array[i].style.display = 'none';
+    array[i].setAttribute('class', '');
+  }
+}
+
 //function will reset game area when called
 function gameRestart(gameCondition, button) {
   button.onclick = function() {
     cardsMatched = [];
     gameCondition.style.display = 'none';
     addImgToCards(imgArray, listOfImgTags, 'src');
-    returnCards();
+    returnCards(listOfImgTags);
   }
 }
 
