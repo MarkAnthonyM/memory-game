@@ -5,6 +5,9 @@ const winScreen = document.getElementById('winModal');
 const loseScreen = document.getElementById('loseModal');
 const modalClose = document.getElementsByClassName('modal-button');
 const mainTable = document.getElementById('cardTable');
+const timer = document.querySelector('span');
+let minutes = 3;
+let seconds = 59;
 let cardsMatched = [];
 
 //Array used to store card images
@@ -159,6 +162,34 @@ function gameRestart(gameCondition, button) {
   }
 }
 
+//Function will count timer down
+function timerCountdown() {
+  const timeOutput = (minutes > 9 ? minutes : '0' + minutes) + ':' + (seconds > 9 ? seconds : '0' + seconds);
+  if (minutes > 0) {
+    if (seconds <= 60 && seconds > 0) {
+      seconds -= 1;
+    } else {
+      seconds = 59;
+      minutes -= 1;
+    }
+    timer.textContent = timeOutput;
+    timerClock();
+  } else if (minutes === 0 && seconds > 0) {
+    seconds -= 1;
+    timer.textContent = timeOutput;
+    timerClock();
+  } else {
+    timer.textContent = 'Time Up!';
+    console.log('This should be the only log');
+  }
+}
+
+function timerClock() {
+  setTimeout(timerCountdown, 1000);
+}
+
 appendToElement(listOfCards, 'img');
 addImgToCards(imgArray, listOfImgTags, 'src');
 cardFlip();
+cardFlip(listOfCards, listOfImgTags);
+timerClock();
