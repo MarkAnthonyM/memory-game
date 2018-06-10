@@ -159,7 +159,6 @@ function gameRestart(gameCondition, button) {
   }
 }
 
-// modalClose.onclick = gameStart();
 appendToElement(listOfCards, 'img');
 addImgToCards(imgArray, listOfImgTags, 'src');
 cardFlip();
