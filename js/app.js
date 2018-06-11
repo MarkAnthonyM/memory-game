@@ -192,12 +192,20 @@ function gameRestart(gameCondition, button) {
     gameCondition.style.display = 'none';
     addImgToCards(imgArray, listOfImgTags, 'src');
     returnCards(listOfImgTags);
+    starReset(stars);
     moves[0].firstElementChild.textContent = 'Moves: 0';
     timer.textContent = '4:00';
     turns = 0;
     minutes = 3
     seconds = 59
     timerClock();
+  }
+}
+
+//Function will reset state of star rating
+function starReset(starArray) {
+  for (let i = 0; i < starArray.length; i++) {
+    starArray[i].innerHTML = '&#9733;';
   }
 }
 
