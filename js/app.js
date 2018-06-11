@@ -133,28 +133,6 @@ function showModal(gameCondition) {
   gameCondition.style.display = 'block';
 }
 
-//Older, less efficent code. Keeping around for documentation purposes.
-// function cardFlip(array, tag) {
-//   tempArray = [];
-//   for (let i = 0; i < array.length; i++) {
-//     array[i].addEventListener('click', function(event) {
-//       if (tag[i].style.display === 'none') {
-//         tag[i].style.display = '';
-//         tag[i].setAttribute('class', 'flipped');
-//         tempArray.push(event.target.firstElementChild.currentSrc);
-//         if (tempArray.length === 2) {
-//           checkMatch(tempArray);
-//           tempArray = [];
-//         }
-//       } else {
-//         tag[i].style.display = 'none';
-//         tag[i].setAttribute('class', '');
-//         tempArray.splice(0, 1);
-//       }
-//     })
-//   }
-// }
-
 //Function will remove "hidden" attribute from img elements
 function returnCards(array) {
   console.log(listOfImgTags);
