@@ -65,7 +65,6 @@ function checkMatch(array) {
       toRemove[i].style.visibility = 'hidden';
     }
     cardsMatched.push(toRemove[0]);
-    gameWin(cardsMatched);
   } else {
     resetCard(toRemove);
   }
@@ -73,10 +72,24 @@ function checkMatch(array) {
 
 //Function will check array storing matched cards for the correct amount
 //in order to win game
-function gameWin(cardArray) {
-  if (cardArray.length === 6) {
-    showModal(winScreen);
-    gameRestart(winScreen, modalClose[0]);
+function gameOutcome(cardArray) {
+  if (minutes > 0 && seconds >= 0) {
+    if (cardArray.length === 6) {
+      showModal(winScreen);
+      gameRestart(winScreen, modalClose[0]);
+    } else {
+      timerClock();
+    }
+  } else if (minutes === 0 && seconds > 0) {
+    if (cardArray.length === 6) {
+      showModal(winScreen);
+      gameRestart(winScreen, modalClose[0]);
+    } else {
+      timerClock();
+    }
+  } else {
+    showModal(loseScreen);
+    gameRestart(loseScreen, modalClose[1]);
   }
 }
 
@@ -159,6 +172,10 @@ function gameRestart(gameCondition, button) {
     gameCondition.style.display = 'none';
     addImgToCards(imgArray, listOfImgTags, 'src');
     returnCards(listOfImgTags);
+    timer.textContent = '4:00';
+    minutes = 3
+    seconds = 59
+    timerClock();
   }
 }
 
@@ -173,14 +190,14 @@ function timerCountdown() {
       minutes -= 1;
     }
     timer.textContent = timeOutput;
-    timerClock();
+    gameOutcome(cardsMatched);
   } else if (minutes === 0 && seconds > 0) {
     seconds -= 1;
     timer.textContent = timeOutput;
-    timerClock();
+    gameOutcome(cardsMatched);
   } else {
     timer.textContent = 'Time Up!';
-    console.log('This should be the only log');
+    gameOutcome(cardsMatched);
   }
 }
 
@@ -191,5 +208,4 @@ function timerClock() {
 appendToElement(listOfCards, 'img');
 addImgToCards(imgArray, listOfImgTags, 'src');
 cardFlip();
-cardFlip(listOfCards, listOfImgTags);
 timerClock();
