@@ -60,13 +60,18 @@ main {
 }
 
 .moves {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .row-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.stars {
+  display: flex;
+  margin-left: 20px;
 }
 
 .table {
