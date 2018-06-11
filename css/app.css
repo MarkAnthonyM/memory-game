@@ -1,3 +1,8 @@
+body {
+  background-color: #FE7FD8;
+  height: auto;
+}
+
 h1 {
   margin: 0px;
   padding: 100px;
@@ -6,17 +11,21 @@ h1 {
 img {
   width: 100%;
   height: 100%;
+  border-radius: 10px 10px 10px 10px;
 }
 
 main {
   box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card {
   width: 25%;
   height: 64px;
-  background-color: white;
+  background-color: #602656;
   margin: 20px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .game-stats {
@@ -75,5 +84,7 @@ main {
 }
 
 .table {
-  background-color: black;
+  background: linear-gradient(45deg, #F9298D, #FE4F93, #FC849F);
+  border-radius: 10px 10px 10px 10px;
+  /* box-shadow: 10px 5px 5px #D5B6D5; */
 }
