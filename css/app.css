@@ -26,10 +26,17 @@ main {
   background-color: #602656;
   margin: 20px;
   border-radius: 10px 10px 10px 10px;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
 .card:hover {
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
+}
+
+.flip {
+  transform: rotateY(180deg);
 }
 
 .game-stats {
@@ -91,4 +98,5 @@ main {
   background: linear-gradient(45deg, #F9298D, #FE4F93, #FC849F);
   border-radius: 10px 10px 10px 10px;
   /* box-shadow: 10px 5px 5px #D5B6D5; */
+  perspective: 1000px;
 }
