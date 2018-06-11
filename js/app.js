@@ -7,6 +7,8 @@ const modalClose = document.getElementsByClassName('modal-button');
 const mainTable = document.getElementById('cardTable');
 const timer = document.querySelector('span');
 const moves = document.getElementsByClassName('moves');
+const stars = document.getElementsByClassName('star');
+let starAmount = 2;
 let turns = 0;
 let minutes = 3;
 let seconds = 59;
@@ -154,6 +156,7 @@ function checkMatch(array) {
       toRemove[i].style.visibility = 'hidden';
     }
     cardsMatched.push(toRemove[0]);
+    starRating(cardsMatched);
   } else {
     resetCard(toRemove);
   }
@@ -201,6 +204,13 @@ function gameRestart(gameCondition, button) {
 //Function to show modal based on game end condition
 function showModal(gameCondition) {
   gameCondition.style.display = 'block';
+}
+
+function starRating(array) {
+  if (array.length % 2 === 0) {
+    stars[starAmount].innerHTML = '&#9734;';
+    starAmount -= 1;
+  }
 }
 
 //Function will keep track of turns taken
