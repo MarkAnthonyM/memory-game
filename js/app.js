@@ -6,6 +6,8 @@ const loseScreen = document.getElementById('loseModal');
 const modalClose = document.getElementsByClassName('modal-button');
 const mainTable = document.getElementById('cardTable');
 const timer = document.querySelector('span');
+const moves = document.getElementsByClassName('moves');
+let turns = 0;
 let minutes = 3;
 let seconds = 59;
 let cardsMatched = [];
@@ -58,7 +60,7 @@ function cardFlip() {
         event.target.firstElementChild.setAttribute('class', 'flipped');
         tempArray.push(event.target.firstElementChild.currentSrc);
         if (tempArray.length === 2) {
-          // setTimeout(checkMatch, 3000, tempArray);
+          turnCount();
           checkMatch(tempArray);
           tempArray = [];
         }
@@ -187,7 +189,9 @@ function gameRestart(gameCondition, button) {
     gameCondition.style.display = 'none';
     addImgToCards(imgArray, listOfImgTags, 'src');
     returnCards(listOfImgTags);
+    moves[0].firstElementChild.textContent = 'Moves: 0';
     timer.textContent = '4:00';
+    turns = 0;
     minutes = 3
     seconds = 59
     timerClock();
@@ -197,6 +201,12 @@ function gameRestart(gameCondition, button) {
 //Function to show modal based on game end condition
 function showModal(gameCondition) {
   gameCondition.style.display = 'block';
+}
+
+//Function will keep track of turns taken
+function turnCount() {
+  turns += 1;
+  moves[0].firstElementChild.textContent = 'Moves: ' + turns;
 }
 
 appendToElement(listOfCards, 'img');
