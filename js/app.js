@@ -8,6 +8,7 @@ const mainTable = document.getElementById('cardTable');
 const timer = document.querySelector('span');
 const moves = document.getElementsByClassName('moves');
 const stars = document.getElementsByClassName('star');
+const flippedCards = document.getElementsByClassName('flip');
 let starAmount = 2;
 let turns = 0;
 let minutes = 3;
@@ -51,27 +52,44 @@ function appendToElement(array, string) {
 }
 
 //Code will flip card when clicked on and check for matching cards
+// function cardFlip() {
+//   tempArray = [];
+//   mainTable.addEventListener('click', function(event) {
+//     if (event.target.getAttribute('class') === 'card') {
+//       if (event.target.firstElementChild.style.visibility === 'hidden') {
+//         console.log('this condition fired!');
+//       } else {
+//         event.target.firstElementChild.style.display = '';
+//         event.target.firstElementChild.setAttribute('class', 'flipped');
+//         tempArray.push(event.target.firstElementChild.currentSrc);
+//         if (tempArray.length === 2) {
+//           turnCount();
+//           checkMatch(tempArray);
+//           tempArray = [];
+//         }
+//       }
+//     } else {
+//       if (event.target.nodeName === 'IMG') {
+//         event.target.style.display = 'none';
+//         event.target.setAttribute('class', '');
+//         tempArray.splice(0, 1);
+//       }
+//     }
+//   })
+// }
+
 function cardFlip() {
   tempArray = [];
   mainTable.addEventListener('click', function(event) {
     if (event.target.getAttribute('class') === 'card') {
-      if (event.target.firstElementChild.style.visibility === 'hidden') {
-        console.log('this condition fired!');
-      } else {
-        event.target.firstElementChild.style.display = '';
-        event.target.firstElementChild.setAttribute('class', 'flipped');
-        tempArray.push(event.target.firstElementChild.currentSrc);
-        if (tempArray.length === 2) {
-          turnCount();
-          checkMatch(tempArray);
-          tempArray = [];
-        }
-      }
-    } else {
-      if (event.target.nodeName === 'IMG') {
-        event.target.style.display = 'none';
-        event.target.setAttribute('class', '');
-        tempArray.splice(0, 1);
+      event.target.classList.toggle('flip');
+      event.target.firstElementChild.style.display = '';
+      event.target.firstElementChild.setAttribute('class', 'flipped');
+      tempArray.push(event.target.firstElementChild.currentSrc);
+      if (tempArray.length === 2) {
+        turnCount();
+        setTimeout(checkMatch, 1000, tempArray);
+        tempArray = [];
       }
     }
   })
@@ -89,6 +107,8 @@ function resetCard(array) {
   while (array.length > 0) {
     array[0].style.display = 'none'
     array[0].setAttribute('class', '');
+    flippedCards[0].setAttribute('class', 'card');
+    console.log(flippedCards);
   }
 }
 
@@ -152,11 +172,12 @@ GAME EVALUATION FUNCTIONS:
 function checkMatch(array) {
   const toRemove = document.getElementsByClassName('flipped')
   if (array[0] === array[1]) {
-    for (let i = 0; i < toRemove.length; i++) {
-      toRemove[i].style.visibility = 'hidden';
-    }
     cardsMatched.push(toRemove[0]);
     starRating(cardsMatched);
+    while (toRemove.length > 0) {
+      toRemove[0].setAttribute('class', 'correct');
+      flippedCards[0].setAttribute('class', 'card');
+    }
   } else {
     resetCard(toRemove);
   }
@@ -207,6 +228,7 @@ function starReset(starArray) {
   for (let i = 0; i < starArray.length; i++) {
     starArray[i].innerHTML = '&#9733;';
   }
+  starAmount = 2;
 }
 
 //Function to show modal based on game end condition
