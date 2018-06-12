@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
     <title>My Memory Game!</title>
   </head>
   <body>
     <main>
+      <header>
+        <h1 class="game-title">Memory Game</h1>
+      </header>
       <div id="gameStats" class="game-stats">
         <div id="Clock" class="timeClock">
           <p>Time Left: <span>4:00</span></p>
@@ -83,7 +87,7 @@
     <!-- The Win Modal -->
     <div id="winModal" class="modal">
       <div class="modal-content">
-        <h1>You've did it! Good job!</h1>
+        <h1 class="modal-title">You've did it! Good job!</h1>
         <h2></h2>
         <button class="modal-button" type="button" name="win-button">Play Again</button>
       </div>
@@ -91,7 +95,7 @@
     <!-- The lose Modal -->
     <div id="loseModal" class="modal">
       <div class="modal-content">
-        <h1>You lost, too bad! Better luck next Time!</h1>
+        <h1 class="modal-title">You lost, too bad! Better luck next Time!</h1>
         <button class="modal-button" type="button" name="lose-button">Try Again</button>
       </div>
     </div>

@@ -5,7 +5,6 @@ body {
 
 h1 {
   margin: 0px;
-  padding: 100px 100px 50px 100px;
 }
 
 h2 {
@@ -22,7 +21,7 @@ img {
 main {
   box-sizing: border-box;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 7px;
 }
 
 .card {
@@ -46,6 +45,14 @@ main {
 
 .game-stats {
   display: flex;
+  justify-content: center;
+}
+
+.game-title {
+  text-align: center;
+  font-family: 'Audiowide', cursive;
+  font-size: 60px;
+  text-shadow: 1px 1px 2px white, 0 0 25px red, 0 0 5px pink;
 }
 
 /* Modal Background */
@@ -86,6 +93,10 @@ main {
   text-align: center;
 }
 
+.modal-title {
+  padding: 100px 100px 50px 100px;
+}
+
 .moves {
   margin-left: 20px;
 }
@@ -104,6 +115,6 @@ main {
 .table {
   background: linear-gradient(45deg, #F9298D, #FE4F93, #FC849F);
   border-radius: 10px 10px 10px 10px;
-  /* box-shadow: 10px 5px 5px #D5B6D5; */
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.7);
   perspective: 1000px;
 }
