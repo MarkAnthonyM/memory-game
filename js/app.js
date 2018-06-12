@@ -1,6 +1,7 @@
 //List of Variables
-const listOfCards = document.querySelectorAll('.card');
+let listOfCards = document.querySelectorAll('.card');
 const listOfImgTags = document.getElementsByTagName('img');
+const listOfRows = document.getElementsByClassName('row-container');
 const winScreen = document.getElementById('winModal');
 const loseScreen = document.getElementById('loseModal');
 const modalClose = document.getElementsByClassName('modal-button');
@@ -45,9 +46,9 @@ function addImgToCards(imagesArray, tagArray, attr) {
 }
 
 //This function will append created tags to elements
-function appendToElement(array, string) {
+function appendToElement(array, string, tagAttr, attrValue) {
   for (let i = 0; i < array.length; i++) {
-    let tagContainer = createTag(string);
+    let tagContainer = createTag(string, tagAttr, attrValue);
     array[i].appendChild(tagContainer);
   }
 }
@@ -104,10 +105,12 @@ function checkDeviceSize() {
 }
 
 //this function when called creates element tags
-function createTag(string) {
+function createTag(string, tagAttr, attrValue) {
   const tag = document.createElement(string);
   if (string === 'img') {
-    tag.style.display = 'none';
+    tag.style.display = attrValue;
+  } else {
+    tag.setAttribute(tagAttr, attrValue);
   }
   return tag;
 }
@@ -118,17 +121,34 @@ function resetCard(array) {
     array[0].style.display = 'none'
     array[0].setAttribute('class', '');
     flippedCards[0].setAttribute('class', 'card');
-    console.log(flippedCards);
   }
 }
 
 //Function will remove "hidden" attribute from img elements
 function returnCards(array) {
-  console.log(listOfImgTags);
   for (let i = 0; i < array.length; i++) {
     array[i].style.visibility = 'visible';
     array[i].style.display = 'none';
     array[i].setAttribute('class', '');
+  }
+}
+
+//Function will setup game area
+function setupGame() {
+  if (checkDeviceSize() >= 650) {
+    appendToElement(listOfRows, 'div', 'class', 'card');
+    listOfCards = document.querySelectorAll('.card');
+    console.log(listOfCards);
+    appendToElement(listOfCards, 'img', 'display', 'none');
+    addImgToCards(imgArray, listOfImgTags, 'src');
+    cardFlip();
+    timerClock();
+  } else {
+    appendToElement(listOfCards, 'img', 'display', 'none');
+    console.log(listOfCards);
+    addImgToCards(imgArray, listOfImgTags, 'src');
+    cardFlip();
+    timerClock();
   }
 }
 
@@ -260,7 +280,4 @@ function turnCount() {
   moves[0].firstElementChild.textContent = 'Moves: ' + turns;
 }
 
-appendToElement(listOfCards, 'img');
-addImgToCards(imgArray, listOfImgTags, 'src');
-cardFlip();
-timerClock();
+setupGame();
