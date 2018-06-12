@@ -47,7 +47,7 @@ function addImgToCards(imagesArray, tagArray, attr) {
 //This function will append created tags to elements
 function appendToElement(array, string) {
   for (let i = 0; i < array.length; i++) {
-    let tagContainer = makeTag(string);
+    let tagContainer = createTag(string);
     array[i].appendChild(tagContainer);
   }
 }
@@ -103,11 +103,13 @@ function checkDeviceSize() {
   return windowSize;
 }
 
-//this function when called creates img elements
-function makeTag(string) {
-  const imgEle = document.createElement(string);
-  imgEle.style.display = 'none';
-  return imgEle;
+//this function when called creates element tags
+function createTag(string) {
+  const tag = document.createElement(string);
+  if (string === 'img') {
+    tag.style.display = 'none';
+  }
+  return tag;
 }
 
 //Function will reset card when called
