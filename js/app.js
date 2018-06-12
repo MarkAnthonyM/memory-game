@@ -96,6 +96,13 @@ function cardFlip() {
   })
 }
 
+//Function will check the size of device viewing app and return
+//size in pixels
+function checkDeviceSize() {
+  const windowSize = window.innerWidth;
+  return windowSize;
+}
+
 //this function when called creates img elements
 function makeTag(string) {
   const imgEle = document.createElement(string);
