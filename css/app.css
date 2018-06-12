@@ -5,7 +5,12 @@ body {
 
 h1 {
   margin: 0px;
-  padding: 100px;
+  padding: 100px 100px 50px 100px;
+}
+
+h2 {
+  margin: 0px;
+  padding-bottom: 50px;
 }
 
 img {
@@ -60,20 +65,22 @@ main {
 /* Modal Close Button */
 .modal-button {
   color: #aaa;
+  background-color: #501559;
   font-size: 28px;
   font-weight: bold;
   border-radius: 5px 5px 5px 5px;
+  border-color: white;
 }
 
 .modal-button:hover, .modal-button:focus {
-  color: black;
+  color: white;
   text-decoration: none;
   cursor: pointer;
 }
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #FF7AD5;
   width: 100%;
   height: 100%;
   text-align: center;

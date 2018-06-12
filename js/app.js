@@ -7,6 +7,7 @@ const modalClose = document.getElementsByClassName('modal-button');
 const mainTable = document.getElementById('cardTable');
 const timer = document.querySelector('span');
 const moves = document.getElementsByClassName('moves');
+const moveAmount = document.getElementsByTagName('h2');
 const stars = document.getElementsByClassName('star');
 const flippedCards = document.getElementsByClassName('flip');
 let starAmount = 2;
@@ -234,6 +235,7 @@ function starReset(starArray) {
 //Function to show modal based on game end condition
 function showModal(gameCondition) {
   gameCondition.style.display = 'block';
+  moveAmount[0].textContent = 'Number of moves: ' + turns;
 }
 
 function starRating(array) {
