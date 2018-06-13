@@ -107,6 +107,11 @@ main {
   justify-content: space-between;
 }
 
+.star {
+  margin: 0px;
+  padding-top: 15px;
+}
+
 .stars {
   display: flex;
   margin-left: 20px;
