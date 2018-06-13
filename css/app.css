@@ -101,6 +101,20 @@ main {
   margin-left: 20px;
 }
 
+.restart-button {
+  margin: 15px 0px 15px 20px;
+  border-radius: 10px 10px 10px 10px;
+  border-color: white;
+  color: #aaa;
+  background-color: #501559;
+}
+
+.restart-button:hover, .restart-button:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .row-container {
   width: 100%;
   display: flex;
