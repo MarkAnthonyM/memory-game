@@ -38,6 +38,10 @@
   .game-stats {
     font-size: 20px;
   }
+
+  .modal-title {
+    padding: 300px 100px 50px 100px;
+  }
 }
 
 @media screen and (min-width: 650px) {
