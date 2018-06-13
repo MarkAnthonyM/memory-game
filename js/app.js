@@ -9,9 +9,10 @@ const mainTable = document.getElementById('cardTable');
 const timer = document.querySelector('span');
 const moves = document.getElementsByClassName('moves');
 const moveAmount = document.getElementsByTagName('h2');
-const stars = document.getElementsByClassName('star');
+const starContainer = document.getElementById('starList');
+let stars = document.getElementsByClassName('star');
 const flippedCards = document.getElementsByClassName('flip');
-let starAmount = 2;
+let starAmount = null;
 let turns = 0;
 let minutes = 3;
 let seconds = 59;
@@ -53,33 +54,14 @@ function appendToElement(array, string, tagAttr, attrValue) {
   }
 }
 
-//Code will flip card when clicked on and check for matching cards
-// function cardFlip() {
-//   tempArray = [];
-//   mainTable.addEventListener('click', function(event) {
-//     if (event.target.getAttribute('class') === 'card') {
-//       if (event.target.firstElementChild.style.visibility === 'hidden') {
-//         console.log('this condition fired!');
-//       } else {
-//         event.target.firstElementChild.style.display = '';
-//         event.target.firstElementChild.setAttribute('class', 'flipped');
-//         tempArray.push(event.target.firstElementChild.currentSrc);
-//         if (tempArray.length === 2) {
-//           turnCount();
-//           checkMatch(tempArray);
-//           tempArray = [];
-//         }
-//       }
-//     } else {
-//       if (event.target.nodeName === 'IMG') {
-//         event.target.style.display = 'none';
-//         event.target.setAttribute('class', '');
-//         tempArray.splice(0, 1);
-//       }
-//     }
-//   })
-// }
+//Function will create and append stars
+function appendStars(ele, string, tagAttr, attrValue) {
+  let star = createTag(string, tagAttr, attrValue);
+  star.innerHTML = '&#9733;';
+  ele.appendChild(star);
+}
 
+//Code will flip card when clicked on and check for matching cards
 function cardFlip() {
   tempArray = [];
   mainTable.addEventListener('click', function(event) {
@@ -136,17 +118,18 @@ function returnCards(array) {
 //Function will setup game area
 function setupGame() {
   if (checkDeviceSize() >= 650) {
+    appendStars(starContainer, 'p', 'class', 'star');
+    starAmount = stars.length - 1;
     appendToElement(listOfRows, 'div', 'class', 'card');
     listOfCards = document.querySelectorAll('.card');
-    console.log(listOfCards);
     appendToElement(listOfCards, 'img', 'display', 'none');
     addImgToCards(imgArray, listOfImgTags, 'src');
     cardFlip();
     timerClock();
   } else {
     appendToElement(listOfCards, 'img', 'display', 'none');
-    console.log(listOfCards);
     addImgToCards(imgArray, listOfImgTags, 'src');
+    starAmount = stars.length - 1;
     cardFlip();
     timerClock();
   }
@@ -217,14 +200,14 @@ function checkMatch(array) {
 //in order to win game
 function gameOutcome(cardArray) {
   if (minutes > 0 && seconds >= 0) {
-    if (cardArray.length === 6) {
+    if (cardArray.length === (listOfCards.length / 2)) {
       showModal(winScreen);
       gameRestart(winScreen, modalClose[0]);
     } else {
       timerClock();
     }
   } else if (minutes === 0 && seconds > 0) {
-    if (cardArray.length === 6) {
+    if (cardArray.length === (listOfCards.length / 2)) {
       showModal(winScreen);
       gameRestart(winScreen, modalClose[0]);
     } else {
@@ -258,13 +241,14 @@ function starReset(starArray) {
   for (let i = 0; i < starArray.length; i++) {
     starArray[i].innerHTML = '&#9733;';
   }
-  starAmount = 2;
+  starAmount = starArray.length - 1;
 }
 
 //Function to show modal based on game end condition
 function showModal(gameCondition) {
   gameCondition.style.display = 'block';
   moveAmount[0].textContent = 'Number of moves: ' + turns;
+  moveAmount[1].textContent = 'Time left: ' + timer.textContent;
 }
 
 function starRating(array) {
