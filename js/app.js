@@ -5,6 +5,7 @@ const listOfRows = document.getElementsByClassName('row-container');
 const winScreen = document.getElementById('winModal');
 const loseScreen = document.getElementById('loseModal');
 const modalClose = document.getElementsByClassName('modal-button');
+const restartButton = document.getElementsByClassName('restart-button');
 const mainTable = document.getElementById('cardTable');
 const timer = document.querySelector('span');
 const moves = document.getElementsByClassName('moves');
@@ -97,6 +98,21 @@ function createTag(string, tagAttr, attrValue) {
   return tag;
 }
 
+//Funtion will start game over
+function startOver(button) {
+  button.onclick = function() {
+    cardsMatched = [];
+    addImgToCards(imgArray, listOfImgTags, 'src');
+    returnCards(listOfImgTags);
+    starReset(stars);
+    moves[0].firstElementChild.textContent = 'Moves: 0';
+    timer.textContent = '4:00';
+    turns = 0;
+    minutes = 3
+    seconds = 59
+  }
+}
+
 //Function will reset card when called
 function resetCard(array) {
   while (array.length > 0) {
@@ -126,12 +142,14 @@ function setupGame() {
     addImgToCards(imgArray, listOfImgTags, 'src');
     cardFlip();
     timerClock();
+    startOver(restartButton[0]);
   } else {
     appendToElement(listOfCards, 'img', 'display', 'none');
     addImgToCards(imgArray, listOfImgTags, 'src');
     starAmount = stars.length - 1;
     cardFlip();
     timerClock();
+    startOver(restartButton[0]);
   }
 }
 
