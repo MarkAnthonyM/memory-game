@@ -39,6 +39,20 @@ main {
   /* transform: scale(1.1); */
 }
 
+.correct {
+  animation-name: pulse;
+  animation-duration: 1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
 .flip {
   transform: rotateY(180deg);
 }

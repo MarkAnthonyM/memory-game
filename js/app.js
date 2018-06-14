@@ -209,7 +209,7 @@ function checkMatch(array) {
     cardsMatched.push(toRemove[0]);
     starRating(cardsMatched);
     while (toRemove.length > 0) {
-      toRemove[0].setAttribute('class', 'correct');
+      toRemove[0].setAttribute('class', '');
       flippedCards[0].setAttribute('class', 'card');
     }
     return tempArray = [];
