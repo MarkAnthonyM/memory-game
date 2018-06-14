@@ -66,15 +66,18 @@ function appendStars(ele, string, tagAttr, attrValue) {
 function cardFlip() {
   tempArray = [];
   mainTable.addEventListener('click', function(event) {
-    if (event.target.getAttribute('class') === 'card') {
-      event.target.classList.toggle('flip');
-      event.target.firstElementChild.style.display = '';
-      event.target.firstElementChild.setAttribute('class', 'flipped');
-      tempArray.push(event.target.firstElementChild.currentSrc);
-      if (tempArray.length === 2) {
-        turnCount();
-        setTimeout(checkMatch, 1000, tempArray);
-        tempArray = [];
+    if (tempArray.length >= 2) {
+      console.log('Do nothing');
+    } else {
+      if (event.target.getAttribute('class') === 'card') {
+        event.target.classList.toggle('flip');
+        event.target.firstElementChild.style.display = '';
+        event.target.firstElementChild.setAttribute('class', 'flipped');
+        tempArray.push(event.target.firstElementChild.currentSrc);
+        if (tempArray.length === 2) {
+          turnCount();
+          setTimeout(checkMatch, 1000, tempArray);
+        }
       }
     }
   })
@@ -209,8 +212,10 @@ function checkMatch(array) {
       toRemove[0].setAttribute('class', 'correct');
       flippedCards[0].setAttribute('class', 'card');
     }
+    return tempArray = [];
   } else {
     resetCard(toRemove);
+    return tempArray = [];
   }
 }
 
