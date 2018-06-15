@@ -12,6 +12,7 @@ const moves = document.getElementsByClassName('moves');
 const moveAmount = document.getElementsByTagName('h2');
 const starContainer = document.getElementById('starList');
 let stars = document.getElementsByClassName('star');
+let noStars = document.getElementsByClassName('no-star');
 const flippedCards = document.getElementsByClassName('flip');
 let starAmount = null;
 let turns = 0;
@@ -55,13 +56,6 @@ function appendToElement(array, string, tagAttr, attrValue) {
   }
 }
 
-//Function will create and append stars
-function appendStars(ele, string, tagAttr, attrValue) {
-  let star = createTag(string, tagAttr, attrValue);
-  star.innerHTML = '&#9733;';
-  ele.appendChild(star);
-}
-
 //Code will flip card when clicked on and check for matching cards
 function cardFlip() {
   tempArray = [];
@@ -76,6 +70,7 @@ function cardFlip() {
         tempArray.push(event.target.firstElementChild.currentSrc);
         if (tempArray.length === 2) {
           turnCount();
+          starRating(listOfCards);
           setTimeout(checkMatch, 1000, tempArray);
         }
       }
@@ -107,7 +102,7 @@ function startOver(button) {
     cardsMatched = [];
     addImgToCards(imgArray, listOfImgTags, 'src');
     returnCards(listOfImgTags);
-    starReset(stars);
+    starReset(noStars);
     moves[0].firstElementChild.textContent = 'Moves: 0';
     timer.textContent = '4:00';
     turns = 0;
@@ -137,7 +132,6 @@ function returnCards(array) {
 //Function will setup game area
 function setupGame() {
   if (checkDeviceSize() >= 650) {
-    appendStars(starContainer, 'p', 'class', 'star');
     starAmount = stars.length - 1;
     appendToElement(listOfRows, 'div', 'class', 'card');
     listOfCards = document.querySelectorAll('.card');
@@ -207,7 +201,6 @@ function checkMatch(array) {
   const toRemove = document.getElementsByClassName('flipped')
   if (array[0] === array[1]) {
     cardsMatched.push(toRemove[0]);
-    starRating(cardsMatched);
     while (toRemove.length > 0) {
       toRemove[0].setAttribute('class', '');
       flippedCards[0].setAttribute('class', 'card');
@@ -249,7 +242,7 @@ function gameRestart(gameCondition, button) {
     gameCondition.style.display = 'none';
     addImgToCards(imgArray, listOfImgTags, 'src');
     returnCards(listOfImgTags);
-    starReset(stars);
+    starReset(noStars);
     moves[0].firstElementChild.textContent = 'Moves: 0';
     timer.textContent = '4:00';
     turns = 0;
@@ -261,10 +254,12 @@ function gameRestart(gameCondition, button) {
 
 //Function will reset state of star rating
 function starReset(starArray) {
-  for (let i = 0; i < starArray.length; i++) {
-    starArray[i].innerHTML = '&#9733;';
+  while (starArray.length > 0) {
+    starArray[0].innerHTML = '&#9733;';
+    starArray[0].classList.toggle('star');
+    starArray[0].classList.toggle('no-star');
   }
-  starAmount = starArray.length - 1;
+  starAmount = stars.length - 1;
 }
 
 //Function to show modal based on game end condition
@@ -272,12 +267,29 @@ function showModal(gameCondition) {
   gameCondition.style.display = 'block';
   moveAmount[0].textContent = 'Number of moves: ' + turns;
   moveAmount[1].textContent = 'Time left: ' + timer.textContent;
+  moveAmount[2].textContent = 'Star rating: ' + stars.length;
 }
 
+//Function will rate performance. Removing one star depends on the amount
+//of cards in play, and scales as card amount increases or decreases.
 function starRating(array) {
-  if (array.length % 2 === 0) {
-    stars[starAmount].innerHTML = '&#9734;';
-    starAmount -= 1;
+  if (starAmount > 0) {
+    if (turns === (array.length * .25) + (array.length / 2)) {
+      stars[starAmount].innerHTML = '&#9734;';
+      stars[starAmount].classList.toggle('no-star');
+      stars[starAmount].classList.toggle('star');
+      starAmount -= 1;
+    } else if (turns === (array.length * .50) + (array.length / 2)) {
+      stars[starAmount].innerHTML = '&#9734;';
+      stars[starAmount].classList.toggle('no-star');
+      stars[starAmount].classList.toggle('star');
+      starAmount -= 1;
+    } else if (turns === (array.length * .75) + (array.length / 2)) {
+      stars[starAmount].innerHTML = '&#9734;';
+      stars[starAmount].classList.toggle('no-star');
+      stars[starAmount].classList.toggle('star');
+      starAmount -= 1;
+    }
   }
 }
 

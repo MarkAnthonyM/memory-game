@@ -135,7 +135,7 @@ main {
   justify-content: space-between;
 }
 
-.star {
+.star, .no-star {
   margin: 0px;
   padding-top: 15px;
 }
