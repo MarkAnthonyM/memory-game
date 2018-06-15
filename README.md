@@ -20,7 +20,7 @@ The game will keep track of how many attempts you make at matching cards and dis
 
 A star rating system is in place to rate your performance. The less turns you take, the higher the star rating at the conclusion of the game. You can see your rating as you play the game at the top of the card table. The rating system will take into account the size of the game setup when evaluating your performance.
 
-## Dynamic game setup
+## Dynamic Game Setup
 
 The game is built to be responsive across different devices. On smaller devices, such as mobile phones and small-sized tablets, the game follows a 3x4 setup. On bigger devices, such as large tablets and desktop computers, the game dynamically changes to follow a 4x4 setup.
 
